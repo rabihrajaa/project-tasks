@@ -1,0 +1,52 @@
+type Project {
+    id: ID
+    title: String
+    description: String
+    status: String
+    priority: String
+    startDate: String
+    endDate: String
+    budget: Float
+    progress: Int
+    createdAt: String
+    updatedAt: String
+}
+
+type Query {
+    projects(page: Int!, size: Int!, title: String, description: String, status: String, priority: String): ProjectPage
+    projectById(id: ID!): Project
+}
+
+type Mutation {
+    createProject(
+        title: String!
+        description: String
+        status: String
+        priority: String
+        startDate: String
+        endDate: String
+        budget: Float
+    ): Project
+
+    updateProject(
+        id: ID!
+        title: String
+        description: String
+        status: String
+        priority: String
+        startDate: String
+        endDate: String
+        budget: Float
+        progress: Int
+    ): Project
+
+    deleteProject(id: ID!): Boolean
+}
+
+type ProjectPage {
+    projects: [Project]
+    total: Int
+    page: Int
+    size: Int
+    totalPages: Int
+}

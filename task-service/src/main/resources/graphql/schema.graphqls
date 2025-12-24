@@ -1,0 +1,58 @@
+type Task {
+    id: ID
+    projectId: ID
+    title: String
+    description: String
+    status: String
+    priority: String
+    dueDate: String
+    completed: Boolean
+    assignedUserId: ID
+    estimatedHours: Int
+    actualHours: Int
+    createdAt: String
+    updatedAt: String
+}
+
+type Query {
+    tasksByProject(projectId: ID!, page: Int!, size: Int!, title: String, description: String, status: String, priority: String, completed: Boolean): TaskPage
+    taskById(id: ID!): Task
+    tasks(page: Int!, size: Int!, title: String, description: String, status: String, priority: String, completed: Boolean, projectId: ID): TaskPage
+}
+
+type Mutation {
+    createTask(
+        projectId: ID!
+        title: String!
+        description: String
+        status: String
+        priority: String
+        dueDate: String
+        assignedUserId: ID
+        estimatedHours: Int
+    ): Task
+
+    updateTask(
+        id: ID!
+        title: String
+        description: String
+        status: String
+        priority: String
+        dueDate: String
+        completed: Boolean
+        assignedUserId: ID
+        estimatedHours: Int
+        actualHours: Int
+    ): Task
+
+    completeTask(taskId: ID!): Task
+    deleteTask(taskId: ID!): Boolean
+}
+
+type TaskPage {
+    tasks: [Task]
+    total: Int
+    page: Int
+    size: Int
+    totalPages: Int
+}
